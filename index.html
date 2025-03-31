@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>체스</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+    }
+    .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    .col {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .cell {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40px;
+        width: 40px;
+    }
+    .cell:hover {
+        background-color: #ddd;
+    }
+    .white {
+        background-color: white;
+    }
+    .black {
+        background-color: #bbb;
+    }
+    .piece {
+        height: 30px;
+        width: 30px;
+        background-size: cover;
+    }
+    .piece.selected {
+        background-color: red;
+    }
+    .disaled {
+        pointer-events: none;
+    }
+    .piece:hover {
+        background-color: aqua;
+    }
+
+    .black-piece {
+        transform: rotate(180deg);     
+    }
+    .bk  {
+        background-image: url('https://upload.wikimedia.org/wikipedia/commons/f/f0/Chess_kdt45.svg');
+    }
+    .bq  {
+        background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/47/Chess_qdt45.svg');
+    }
+    .br  {
+        background-image: url('https://upload.wikimedia.org/wikipedia/commons/f/ff/Chess_rdt45.svg');
+    }
+    .bb  {
+        background-image: url('https://upload.wikimedia.org/wikipedia/commons/9/98/Chess_bdt45.svg');
+    }
+    .bn  {
+        background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/ef/Chess_ndt45.svg');
+    }
+    .bp  {
+        background-image: url('https://upload.wikimedia.org/wikipedia/commons/c/c7/Chess_pdt45.svg');
+    }
+    .white-piece {
+        transform: rotate(0deg);     
+    }
+    .wk  {
+        background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/42/Chess_klt45.svg');
+    }
+    .wq  {
+        background-image: url('https://upload.wikimedia.org/wikipedia/commons/1/15/Chess_qlt45.svg');
+    }
+    .wr  {
+        background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/72/Chess_rlt45.svg');
+    }
+    .wb  {
+        background-image: url('https://upload.wikimedia.org/wikipedia/commons/b/b1/Chess_blt45.svg');
+    }
+    .wn  {
+        background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/70/Chess_nlt45.svg');
+    }
+    .wp  {
+        background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/45/Chess_plt45.svg');
+    }
+
+    #copy-url-btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    #copy-url-btn:hover {
+        background-color: #0056b3;
+    }
+    #copy-url-btn:active {
+        background-color: #004085;
+    }
+
+    #reset-btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #ff0000;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    #reset-btn:hover {
+        background-color: #b30000;
+    }
+    #reset-btn:active {
+        background-color: #850000;
+    }
+    
+</style>
+<body>
+    <div class="col">
+        <div class="row">
+            <div class="cell white a8"></div>
+            <div class="cell black b8"></div>
+            <div class="cell white c8"></div>
+            <div class="cell black d8"></div>
+            <div class="cell white e8"></div>
+            <div class="cell black f8"></div>
+            <div class="cell white g8"></div>
+            <div class="cell black h8"></div>
+        </div>
+        <div class="row">
+            <div class="cell black a7"></div>
+            <div class="cell white b7"></div>
+            <div class="cell black c7"></div>
+            <div class="cell white d7"></div>
+            <div class="cell black e7"></div>
+            <div class="cell white f7"></div>
+            <div class="cell black g7"></div>
+            <div class="cell white h7"></div>
+        </div>
+        <div class="row">
+            <div class="cell white a6"></div>
+            <div class="cell black b6"></div>
+            <div class="cell white c6"></div>
+            <div class="cell black d6"></div>
+            <div class="cell white e6"></div>
+            <div class="cell black f6"></div>
+            <div class="cell white g6"></div>
+            <div class="cell black h6"></div>
+        </div>
+        <div class="row">
+            <div class="cell black a5"></div>
+            <div class="cell white b5"></div>
+            <div class="cell black c5"></div>
+            <div class="cell white d5"></div>
+            <div class="cell black e5"></div>
+            <div class="cell white f5"></div>
+            <div class="cell black g5"></div>
+            <div class="cell white h5"></div>
+        </div>
+        <div class="row">
+            <div class="cell white a4"></div>
+            <div class="cell black b4"></div>
+            <div class="cell white c4"></div>
+            <div class="cell black d4"></div>
+            <div class="cell white e4"></div>
+            <div class="cell black f4"></div>
+            <div class="cell white g4"></div>
+            <div class="cell black h4"></div>
+        </div>
+        <div class="row">
+            <div class="cell black a3"></div>
+            <div class="cell white b3"></div>
+            <div class="cell black c3"></div>
+            <div class="cell white d3"></div>
+            <div class="cell black e3"></div>
+            <div class="cell white f3"></div>
+            <div class="cell black g3"></div>
+            <div class="cell white h3"></div>
+        </div>
+        <div class="row">
+            <div class="cell white a2"></div>
+            <div class="cell black b2"></div>
+            <div class="cell white c2"></div>
+            <div class="cell black d2"></div>
+            <div class="cell white e2"></div>
+            <div class="cell black f2"></div>
+            <div class="cell white g2"></div>
+            <div class="cell black h2"></div>
+        </div>
+        <div class="row">
+            <div class="cell black a1"></div>
+            <div class="cell white b1"></div>
+            <div class="cell black c1"></div>
+            <div class="cell white d1"></div>
+            <div class="cell black e1"></div>
+            <div class="cell white f1"></div>
+            <div class="cell black g1"></div>
+            <div class="cell white h1"></div>
+        </div>
+    </div>
+    <button id="copy-url-btn">URL 복사</button>
+    <button id="reset-btn">리셋</button>
+</body>
+<script src="./main.js"></script>
+</html>
