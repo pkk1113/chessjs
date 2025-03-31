@@ -15,10 +15,10 @@ const pieceToClass = {
 }
 
 const defaultBoardString =
-  'a8brb8bbc8bnd8bqe8bkf8bng8bbh8br' +
+  'a8brb8bnc8bbd8bqe8bkf8bbg8bnh8br' +
   'a7bpb7bpc7bpd7bpe7bpf7bpg7bph7bp' +
   'a2wpb2wpc2wpd2wpe2wpf2wpg2wph2wp' +
-  'a1wrb1wbc1wnd1wqe1wkf1wng1wbh1wr';
+  'a1wrb1wnc1wbd1wqe1wkf1wbg1wnh1wr';
 
 const copyUrlButton = document.querySelector('#copy-url-btn');
 copyUrlButton.addEventListener('click', () => {
